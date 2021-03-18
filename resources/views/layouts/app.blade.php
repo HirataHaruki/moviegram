@@ -18,6 +18,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    @yield('css')
 </head>
 <body>
     <div id="app">
@@ -80,6 +81,13 @@
                 </div>
             </div>
         </nav>
+        
+        <!-- フラッシュメッセージ -->
+        @if (session('flash_message'))
+            <div class="flash_message bg-success text-center">
+                {{ session('flash_message') }}
+            </div>
+        @endif
 
         <main class="main">
             @yield('content')

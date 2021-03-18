@@ -36,8 +36,11 @@ class TopicController extends Controller
      */
     public function store(Request $request)
     {
-        Topic::create($request->all());
-        return redirect()->route('topic.index')->with('success', 'レビューの投稿に成功しました');
+        $post = $request->all();
+        $data = ['user_id' => \Auth::id(), 'title' => $post['title'], 'content' => $post['content'], 'grade' => $post['grade'], 'impression' => $post['impression']];
+        
+        Topic::insert($data);
+        return redirect()->route('topic.index')->with('flash_message', 'レビューの投稿に成功しました');
     }
 
     /**
@@ -74,14 +77,14 @@ class TopicController extends Controller
     public function update(Request $request, $id)
     {
         $update = [
-            'user_id' => $request->user_id,
+            'user_id' => $request->user()->id,
             'title' => $request->title,
             'content' => $request->content,
             'grade' => $request->grade,
             'impression' => $request->impression
         ];
         Topic::where('id', $id)->update($update);
-        return redirect()->route('topic.index')->with('success', 'レビューの編集に成功しました');
+        return redirect()->route('topic.index')->with('flash_message', 'レビューの編集に成功しました');
     }
 
     /**
@@ -93,6 +96,7 @@ class TopicController extends Controller
     public function destroy($id)
     {
         Topic::where('id', $id)->delete();
-        return redirect()->route('topic.index')->with('success', 'レビューの削除に成功しました');
+        return redirect()->route('topic.index')->with('flash_message', 'レビューの削除に成功しました');
     }
+    
 }
