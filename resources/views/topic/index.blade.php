@@ -13,8 +13,8 @@
 				<h3>タイトル：{{ $topic->title }}</h3>
 				<p>内容：{{ $topic->content }}</p>
 				<p>評価（10点満点）：{{ $topic->grade }}</p>
-				<a href="{{ route('topic.show', $topic->id) }}" class='btn btn-secondary'>詳細を読む</a>
-				@if(Auth::user()->id === $topic->user_id)
+				@if(Auth::id() === $topic->user_id)
+					<a href="{{ route('topic.show', $topic->id) }}" class='btn btn-secondary'>詳細を読む</a>
 					<a href="{{ route('topic.edit', $topic->id) }}" class='btn btn-secondary'>編集する</a>
 					<a>
 						<form method='POST' action="{{ route('topic.destroy', $topic->id) }}">
@@ -23,6 +23,8 @@
 							<input type='submit' class='btn btn-secondary' value='削除する'>
 						</form>
 					</a>
+				@else
+					<a href="{{ route('topic.show', $topic->id) }}" class='btn btn-secondary'>詳細を読む</a>
 				@endif
 			</div>
 		</div>
