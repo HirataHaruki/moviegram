@@ -19,4 +19,6 @@ Auth::routes();
 
 Route::resource('/topic', 'TopicController');
 
+Route::get('/search', 'TopicController@search')->name('search');
+
 Route::get('/home', 'HomeController@index')->name('home');

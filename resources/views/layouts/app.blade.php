@@ -45,6 +45,9 @@
                                 <a href="{{ route('topic.index') }}" class='nav-link'>みんなの投稿</a>
                             </li>
                             <li class="nav-item">
+                                <a href="{{ route('search') }}" class='nav-link'>投稿を検索</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
                             @if (Route::has('register'))
@@ -57,7 +60,10 @@
                                 <a href="{{ route('topic.create') }}" class='nav-link'>レビューを書く</a>
                             </li>
                             <li class="nav-item">
-                                <a href=" {{ route('topic.index') }}" class='nav-link'>みんなの投稿</a>
+                                <a href="{{ route('topic.index') }}" class='nav-link'>みんなの投稿</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('search') }}" class='nav-link'>投稿を検索</a>
                             </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

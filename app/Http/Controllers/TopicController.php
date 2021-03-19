@@ -12,7 +12,7 @@ class TopicController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $topics = Topic::all();
         return view('topic.index', compact('topics'));
@@ -97,6 +97,24 @@ class TopicController extends Controller
     {
         Topic::where('id', $id)->delete();
         return redirect()->route('topic.index')->with('flash_message', 'レビューの削除に成功しました');
+    }
+    
+    public function search(Request $request)
+    {
+        $keyword = $request->input('keyword');
+        
+        $query = Topic::query();
+        
+        if (!empty($keyword)) {
+            $query->where('title', 'LIKE', "%{$keyword}%")
+                ->orWhere('content', 'LIKE', "%{$keyword}%")
+                ->orWhere('grade', 'LIKE', "%{$keyword}%")
+                ->orWhere('impression', 'LIKE', "%{$keyword}%");
+        }
+        
+        $topics = $query->get();
+        
+        return view('search', compact('topics', 'keyword'));
     }
     
 }
